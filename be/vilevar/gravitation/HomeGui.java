@@ -273,7 +273,10 @@ public class HomeGui {
 		ObservableList<Star> initial = FXCollections.observableArrayList();
 		initial.addAll(
 				new Star("Sun", 1.9891E30, 7E8, 0, 0, 0, 0, Color.ORANGERED),
-				new Star("Earth", 6E24, 6E6, 152_097_701_000D, 0, 0, 29_291, Color.NAVY));
+				new Star("Earth", 5.9736E24, 6E6, 152_097_701_000D, 0, 0, 29_291, Color.NAVY),
+				new Star("Moon", 7.3477E22, 1737400, 152_097_701_000D-400_300_000, 0, 0, 29_291-995, Color.WHITE),
+				new Star("Mercure", 3.3011E23, 2439700, -46001E6, 0, 0, 58985.9, Color.DARKGREY),
+				new Star("Venus", 4.8685E24, 6051800, 0, 108943E6, -34789.5, 0, Color.RED));
 		return initial;
 	}
 }

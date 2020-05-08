@@ -13,9 +13,12 @@ public class Star implements Cloneable {
 	private double vy0;
 	private Color color;
 	
+	private Vec2d lastPosition;
 	private Vec2d position;
 	private Vec2d speed;
 	private Vec2d acc;
+	
+	private StarWindow window;
 	
 	public Star() {
 		this("Name", 1, 0, 0, 0, 0, 0, Color.NAVY);
@@ -115,6 +118,7 @@ public class Star implements Cloneable {
 	}
 
 	public void setPosition(Vec2d position) {
+		this.lastPosition = position;
 		this.position = position;
 	}
 
@@ -132,6 +136,30 @@ public class Star implements Cloneable {
 	
 	public void setAcceleration(Vec2d acc) {
 		this.acc = acc;
+	}
+	
+	public Vec2d getLastPosition() {
+		return lastPosition;
+	}
+	
+	public void setLastPosition(Vec2d lastPosition) {
+		this.lastPosition = lastPosition;
+	}
+	
+	public StarWindow getWindow() {
+		return window;
+	}
+	
+	public StarWindow createWindow() {
+		return this.window == null ? this.window = new StarWindow(this) : this.window;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void closeWindow() {
+		if(this.window != null) {
+			this.window.close();
+			this.window = null;
+		}
 	}
 	
 	public void save() {

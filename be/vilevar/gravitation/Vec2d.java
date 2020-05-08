@@ -125,16 +125,28 @@ public class Vec2d implements Cloneable {
 		return this;
 	}
 	
+	public BigDecimal bigDot(Vec2d other) {
+		return this.x.multiply(other.x, CTX).add(this.y.multiply(other.y, CTX));
+	}
+	
 	public double dot(Vec2d other) {
-		return this.x.multiply(other.x, CTX).add(this.y.multiply(other.y, CTX)).doubleValue(); 
+		return this.bigDot(other).doubleValue(); 
 	}
 	
 	public double distance(Vec2d other) {
 		return this.clone().subtract(other).length();
 	}
 	
+	public BigDecimal bigCosAngleWith(Vec2d other) {
+		return this.bigDot(other).divide(new BigDecimal(this.length()).multiply(new BigDecimal(other.length()), CTX), CTX);
+	}
+	
+	public double cosAngleWith(Vec2d other) {
+		return this.bigCosAngleWith(other).doubleValue();
+	}
+	
 	public double angleWith(Vec2d other) {
-		return Math.acos(this.dot(other) / (this.length() * other.length()));
+		return Math.acos(this.cosAngleWith(other));
 	}
 	
 	public Vec2d add(Vec2d other) {
@@ -150,7 +162,7 @@ public class Vec2d implements Cloneable {
 	}
 	
 	public boolean equals(Vec2d vec2d) {
-		return vec2d.x == this.x && vec2d.y == this.y;
+		return vec2d.x.compareTo(this.x) == 0 && vec2d.y.compareTo(this.y) == 0;
 	}
 	
 	@Override
